@@ -1,5 +1,6 @@
 use anyhow::Result;
 
+pub mod config;
 pub mod mappings;
 pub mod state;
 pub mod withings;
