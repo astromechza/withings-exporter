@@ -162,9 +162,18 @@ mod tests {
     #[test]
     fn prunes_old_emitted_ids() {
         let mut ids = vec![
-            EmittedIdEntry { id: 1, emitted_at: 499 },
-            EmittedIdEntry { id: 2, emitted_at: 500 },
-            EmittedIdEntry { id: 3, emitted_at: 1_000 },
+            EmittedIdEntry {
+                id: 1,
+                emitted_at: 499,
+            },
+            EmittedIdEntry {
+                id: 2,
+                emitted_at: 500,
+            },
+            EmittedIdEntry {
+                id: 3,
+                emitted_at: 1_000,
+            },
         ];
         prune_emitted_ids(&mut ids, 1_000, 500);
         assert_eq!(ids.iter().map(|e| e.id).collect::<Vec<_>>(), vec![2, 3]);
