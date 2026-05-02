@@ -37,7 +37,14 @@ pub fn init(otlp_endpoint: &str, userid: &str) -> Result<SdkMeterProvider> {
 }
 
 pub async fn shutdown(provider: SdkMeterProvider) -> Result<()> {
-    provider.force_flush().context("force_flush")?;
-    provider.shutdown().context("shutdown")?;
-    Ok(())
+    // force_flush and shutdown internally call futures_executor::block_on, which
+    // panics if called from within an existing async runtime context. Use
+    // spawn_blocking so they run on a dedicated thread pool thread instead.
+    tokio::task::spawn_blocking(move || {
+        provider.force_flush().context("force_flush")?;
+        provider.shutdown().context("shutdown")?;
+        Ok(())
+    })
+    .await
+    .context("shutdown task")?
 }
