@@ -1,0 +1,9 @@
+target
+.git
+*.out
+check-*.sh
+exchange-test.sh
+state.json
+.github
+docs
+README.md
