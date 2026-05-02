@@ -1,0 +1,8 @@
+/target
+*.swp
+.DS_Store
+# spike artifacts contain real tokens; do not commit
+*.out
+check-*.sh
+exchange-test.sh
+state.json
