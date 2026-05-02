@@ -2,6 +2,7 @@ use anyhow::Result;
 
 pub mod mappings;
 pub mod state;
+pub mod withings;
 
 pub async fn run() -> Result<()> {
     println!("withings-exporter v{}", env!("CARGO_PKG_VERSION"));
