@@ -1,4 +1,4 @@
-use anyhow::{Context, Result, bail};
+use anyhow::{bail, Context, Result};
 use hmac::{Hmac, Mac};
 use serde::Deserialize;
 use sha2::Sha256;
