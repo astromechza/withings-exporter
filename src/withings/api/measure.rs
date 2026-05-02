@@ -7,9 +7,9 @@ pub struct MeasureBody {
     #[serde(default)]
     pub timezone: String,
     pub measuregrps: Vec<MeasureGroup>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "super::de_bool_as_none_i64")]
     pub more: Option<i64>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "super::de_bool_as_none_i64")]
     pub offset: Option<i64>,
 }
 
@@ -18,7 +18,9 @@ pub struct MeasureGroup {
     pub grpid: i64,
     pub attrib: i64,
     pub date: i64,
+    #[serde(deserialize_with = "super::de_bool_as_i64")]
     pub created: i64,
+    #[serde(deserialize_with = "super::de_bool_as_i64")]
     pub modified: i64,
     pub category: i64,
     #[serde(default)]

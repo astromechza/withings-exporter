@@ -3,7 +3,7 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize, Clone)]
 pub struct ActivityBody {
     pub activities: Vec<DailyActivity>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "super::de_bool_as_none_i64")]
     pub more: Option<i64>,
 }
 
@@ -11,6 +11,7 @@ pub struct ActivityBody {
 pub struct DailyActivity {
     pub date: String,
     pub timezone: String,
+    #[serde(deserialize_with = "super::de_bool_as_i64")]
     pub modified: i64,
     #[serde(default)]
     pub steps: Option<u64>,

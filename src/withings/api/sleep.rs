@@ -3,7 +3,7 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize, Clone)]
 pub struct SleepBody {
     pub series: Vec<SleepNight>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "super::de_bool_as_none_i64")]
     pub more: Option<i64>,
 }
 
@@ -14,7 +14,9 @@ pub struct SleepNight {
     pub startdate: i64,
     pub enddate: i64,
     pub date: String,
+    #[serde(deserialize_with = "super::de_bool_as_i64")]
     pub created: i64,
+    #[serde(deserialize_with = "super::de_bool_as_i64")]
     pub modified: i64,
     #[serde(default)]
     pub completed: Option<bool>,
