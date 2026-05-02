@@ -37,7 +37,7 @@ pub async fn run() -> Result<()> {
             )
             .await
         }
-        cli::Cmd::Poll => cmd::poll_cmd::run().await,
+        cli::Cmd::Poll { state_file } => cmd::poll_cmd::run(&state_file).await,
         cli::Cmd::DumpState { state_file } => cmd::dump_state::run(&state_file),
     }
 }

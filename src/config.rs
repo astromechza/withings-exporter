@@ -14,13 +14,17 @@ pub struct Config {
 
 impl Config {
     pub fn from_env() -> Result<Self> {
+        Self::from_env_with_state(&PathBuf::from(
+            std::env::var("WITHINGS_STATE_PATH").unwrap_or_else(|_| "/state/state.json".into()),
+        ))
+    }
+
+    pub fn from_env_with_state(state_path: &std::path::Path) -> Result<Self> {
         Ok(Self {
             client_id: std::env::var("WITHINGS_CLIENT_ID").context("WITHINGS_CLIENT_ID")?,
             client_secret: std::env::var("WITHINGS_CLIENT_SECRET")
                 .context("WITHINGS_CLIENT_SECRET")?,
-            state_path: PathBuf::from(
-                std::env::var("WITHINGS_STATE_PATH").unwrap_or_else(|_| "/state/state.json".into()),
-            ),
+            state_path: state_path.to_path_buf(),
             otlp_endpoint: std::env::var("OTLP_ENDPOINT")
                 .unwrap_or_else(|_| "http://otel-collector.monitoring:4318".into()),
             backfill_days: std::env::var("WITHINGS_BACKFILL_DAYS")

@@ -35,7 +35,10 @@ pub enum Cmd {
         state_file: PathBuf,
     },
     /// Run a single poll cycle: refresh → fetch → push → save state.
-    Poll,
+    Poll {
+        #[arg(long, env = "WITHINGS_STATE_PATH", default_value = "/state/state.json")]
+        state_file: PathBuf,
+    },
     /// Print state.json with secrets redacted.
     DumpState {
         #[arg(long, env = "WITHINGS_STATE_PATH", default_value = "/state/state.json")]

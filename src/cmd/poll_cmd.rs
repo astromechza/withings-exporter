@@ -1,6 +1,7 @@
 use anyhow::{Context, Result};
 use opentelemetry::metrics::MeterProvider;
 use reqwest::Client as HttpClient;
+use std::path::Path;
 
 use crate::config::Config;
 use crate::metrics::Instruments;
@@ -9,8 +10,8 @@ use crate::poll::run_poll;
 use crate::state;
 use crate::withings::client::WithingsClient;
 
-pub async fn run() -> Result<()> {
-    let cfg = Config::from_env()?;
+pub async fn run(state_file: &Path) -> Result<()> {
+    let cfg = Config::from_env_with_state(state_file)?;
     let mut state =
         state::load(&cfg.state_path).context("load state — bootstrap with `exchange`?")?;
     let provider = otlp::init(&cfg.otlp_endpoint, &state.tokens.userid)?;
