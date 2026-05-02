@@ -2,7 +2,7 @@
 name = "withings-exporter"
 version = "0.1.0"
 edition = "2021"
-rust-version = "1.86"
+rust-version = "1.88"
 license = "MIT"
 description = "Pulls Withings health data and exports as OTLP metrics."
 
@@ -31,7 +31,7 @@ opentelemetry-otlp = { version = "0.27", features = ["http-proto", "metrics", "r
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
 url = "2"
-rand = "0.8"
+rand = "0.9"
 
 [dev-dependencies]
 wiremock = "0.6"

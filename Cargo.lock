@@ -2638,7 +2638,7 @@ dependencies = [
  "opentelemetry_sdk",
  "predicates",
  "pretty_assertions",
- "rand 0.8.6",
+ "rand 0.9.4",
  "reqwest",
  "serde",
  "serde_json",
