@@ -4,6 +4,7 @@ pub mod config;
 pub mod mappings;
 pub mod metrics;
 pub mod otlp;
+pub mod poll;
 pub mod state;
 pub mod withings;
 
