@@ -6,7 +6,7 @@ COPY Cargo.toml Cargo.lock rust-toolchain.toml ./
 RUN mkdir -p src && echo 'fn main() {}' > src/main.rs && touch src/lib.rs && cargo build --release && rm -rf src
 # Real build
 COPY . .
-RUN touch src/main.rs && cargo build --release && \
+RUN touch src/main.rs src/lib.rs && cargo build --release && \
     strip target/release/withings-exporter
 
 FROM gcr.io/distroless/cc-debian12:nonroot
