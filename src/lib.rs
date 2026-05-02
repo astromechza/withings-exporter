@@ -2,6 +2,7 @@ use anyhow::Result;
 
 pub mod config;
 pub mod mappings;
+pub mod metrics;
 pub mod otlp;
 pub mod state;
 pub mod withings;
